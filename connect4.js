@@ -15,16 +15,26 @@ var board = []; // array of rows, each row is array of cells  (board[y][x])
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
 
-function makeBoard() {
+function makeBoard(width, height) {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  let rowArray = []
+  for (let row = 0; row < height; row++){
+    for (let column = 0; column < width; column++){
+      rowArray.push(null)
+    }
+    board.push(rowArray)
+    rowArray =[]
+  }
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-  
+  const htmlBoard = document.querySelector('#board')
   // TODO: add comment for this code
+  // This section creates a row of "WIDTH"(number) squares to be used as the top row of the game board
+  // So a tr with id "column top" is added to the DOM that consists of tds with ids 0,1,2,...WIDTH respectively
   var top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
@@ -37,6 +47,8 @@ function makeHtmlBoard() {
   htmlBoard.append(top);
 
   // TODO: add comment for this code
+  // Adding a number of "HEIGHT" tr s to the DOM
+  // and on each tr we append a number of "WIDTH" tds with id y-x for a td that is the x-th on the y-th row of the table 
   for (var y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (var x = 0; x < WIDTH; x++) {
@@ -129,5 +141,5 @@ function checkForWin() {
   }
 }
 
-makeBoard();
+makeBoard(WIDTH, HEIGHT);
 makeHtmlBoard();
