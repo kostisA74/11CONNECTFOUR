@@ -4,15 +4,18 @@
   <link href="connect4.css" rel="stylesheet">
 </head>
 <body>
-<h1>CONNECT 4!</h1>
+<h1 id="gameTitle">CONNECT 4!</h1>
 <div id="gamePanel">
-  <h1 id="gameStatus" class="panel">Player 1</h1>
-  <button type="button" class="panel" id="resetBtn">Play again!</button>
+  <button type="button" class="panel btn" id="resetBtn"><span id="resetHover" class="tip">Restart!</span></button>
+  <button type="button" class="panel btn" id="switchBtn"><><span id="switchHover" class="tip">Switch players!</span></button>
+  <h1 id="gameStatus" class="panel"></h1>
+  <span id= "dimensions">6x6</span>
 </div>
 <div id="game">
   <table id="board"></table>
 </div>
-
+<input type="range" id="columnsSlider">
+<input type="range" id="rowsSlider">
 <script src="connect4.js"></script>
 
 </body>
