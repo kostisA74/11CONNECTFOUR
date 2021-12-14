@@ -138,4 +138,6 @@ h1 {
   height: 200px;
   direction: ltr;
   -webkit-appearance: slider-vertical;
+  -webkit-transform: scaleY(-1);
+  transform: scaleY(-1);
 }

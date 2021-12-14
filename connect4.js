@@ -35,8 +35,8 @@ columnsSlider.min = 6
 columnsSlider.max = 20
 columnsSlider.value = 6
 rowsSlider.min = 6
-rowsSlider.max = 14
-rowsSlider.value = 14
+rowsSlider.max = 20
+rowsSlider.value = 6
 dimensions.innerText = `${HEIGHT}x${WIDTH}`
 
 restart.addEventListener('click', restartGame)
@@ -71,7 +71,7 @@ function getWidth() {
 }
 
 function getHeight() {
-  HEIGHT = 20-parseInt(rowsSlider.value)
+  HEIGHT = parseInt(rowsSlider.value)
   addRowsMemBoard()
   addRowsHtmlBoard()
   curHEIGHT = HEIGHT
@@ -325,7 +325,6 @@ function handleClick(evt) {
   // TODO: switch currPlayer 1 <-> 2
   [currPlayer , nextPlayer] = [nextPlayer, currPlayer]
   gameStatus.innerText = `${nameMap.get(currPlayer)} playing...`
-  console.log(currPlayer)
   }
 }
 
