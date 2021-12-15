@@ -4,10 +4,10 @@
  * column until a player gets four-in-a-row (horiz, vert, or diag) or until
  * board fills (tie)
  */
-let curWIDTH = 6;
-let curHEIGHT = 6;
-let WIDTH = 6;
-let HEIGHT = 6;
+let WIDTH = 6;     //Default value for nomber of columns
+let HEIGHT = 6;    //Default value for nomber of ro ws
+let curWIDTH = 6;  //variable to store WIDTH temporarily before it changes
+let curHEIGHT = 6; //variable to store HEIGHT temporarily before it changes
 
 const dimensions = document.querySelector('#dimensions')
 const restart = document.querySelector('#resetBtn')
@@ -20,23 +20,23 @@ const rowsSlider = document.querySelector('#rowsSlider')
 // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
 const htmlBoard = document.querySelector('#board')
 
-let gamestarted = false
+let gamestarted = false // auxiliary variable to assist in enabling-disabling features
 let gameStage = "playing" // Toggled between playing and stopped
 let currPlayer = 1; // active player: 1 or 2
 let nextPlayer = 2; // to toggle order
-let player1Name = "Player1"
-let player2Name = "Player2"
-let nameMap = new Map()
+let player1Name = "Player1" //Default value
+let player2Name = "Player2" //Default value
+let nameMap = new Map() // Variable to map player names
 let board = []; // array of rows, each row is array of cells  (board[y][x])
 
-nameMap.set(1, player1Name)
-nameMap.set(2, player2Name)
-columnsSlider.min = 6
-columnsSlider.max = 20
-columnsSlider.value = 6
-rowsSlider.min = 6
-rowsSlider.max = 20
-rowsSlider.value = 6
+nameMap.set(1, player1Name) 
+nameMap.set(2, player2Name) 
+columnsSlider.min = 6 //Default value
+columnsSlider.max = 20 //Default value
+columnsSlider.value = 6 //Default value
+rowsSlider.min = 6 //Default value
+rowsSlider.max = 20 //Default values
+rowsSlider.value = 6 //Default values
 dimensions.innerText = `${HEIGHT}x${WIDTH}`
 
 restart.addEventListener('click', restartGame)
@@ -48,7 +48,7 @@ switchBtn.addEventListener('mouseout', hideTip)
 columnsSlider.addEventListener('change', getWidth)
 rowsSlider.addEventListener('change', getHeight)
 
-function showTip(event) {
+function showTip(event) { // Displays tip-text when user hovers on start button or switch-order button
   const btn = event.target.id
   btn === 'resetBtn' ? restartHover.style.visibility = 'visible' : switchHover.style.visibility = 'visible'
 }
@@ -62,7 +62,7 @@ function switchOrder() {
   gameStatus.innerText = `${nameMap.get(currPlayer)} playing...`
 }
 
-function getWidth() {
+function getWidth() { //updates Memory and Html Board with changes in column-slider
   WIDTH = parseInt(columnsSlider.value)
   addColumnsMemBoard()
   addColumnsHtmlBoard()
@@ -70,7 +70,7 @@ function getWidth() {
   dimensions.innerText = `${HEIGHT}x${WIDTH}`
 }
 
-function getHeight() {
+function getHeight() { //updates Memory and Html Board with changes in row-slider
   HEIGHT = parseInt(rowsSlider.value)
   addRowsMemBoard()
   addRowsHtmlBoard()
@@ -78,7 +78,7 @@ function getHeight() {
   dimensions.innerText = `${HEIGHT}x${WIDTH}`
 }
 
-function restartGame(){
+function restartGame(){ // Resets all parameters so that the game can start again
   currPlayer = 1
   nextPlayer = 2
   gamestarted = false
@@ -91,8 +91,8 @@ function restartGame(){
   clearBoard()
   toggleBtnDisabled()
 }
-function addColumnsMemBoard(){
-  if (curWIDTH < WIDTH) {
+function addColumnsMemBoard(){ // This function adds or removes rows from the table (Memory) while the 
+  if (curWIDTH < WIDTH) {      // user changes row-slider value
     for (let row = 0; row < HEIGHT; row++){
       for (let column = curWIDTH; column < WIDTH; column++){
         board[row][column] = null
@@ -105,8 +105,8 @@ function addColumnsMemBoard(){
   }
 }
 
-function addRowsMemBoard(){
-  if (curHEIGHT < HEIGHT) {
+function addRowsMemBoard(){  // This function adds or removes rows from the table (Memory) while the 
+  if (curHEIGHT < HEIGHT) {  // user changes row-slider value
     //for (let column = 0; column < WIDTH; column++){
       for (let row = curHEIGHT; row < HEIGHT; row++){
         const newRow = []
@@ -141,9 +141,9 @@ function clearBoard(){
   }
 }
 
-function addColumnsHtmlBoard(){
-  if (curWIDTH < WIDTH) {
-    for (let y = 0; y < HEIGHT; y++  ){
+function addColumnsHtmlBoard(){ // This function adds or removes columns from the table (DOM) while the 
+  if (curWIDTH < WIDTH) {       // user changes column-slider value  
+    for (let y = 0; y < HEIGHT; y++  ){ 
       const row = document.querySelector(`#row${y}`)
       for (let x = curWIDTH; x < WIDTH; x++) {
         const cell = document.createElement("td");
@@ -171,8 +171,8 @@ function addColumnsHtmlBoard(){
   }
 }
 
-function addRowsHtmlBoard(){
-  if (curHEIGHT < HEIGHT) {
+function addRowsHtmlBoard(){ // This function adds or removes rows from the table (DOM) while the
+  if (curHEIGHT < HEIGHT) {  // user changes row-slider value
     for (let x = curHEIGHT; x < HEIGHT; x++  ){
       const newRow = document.createElement('tr')
       newRow.id = `row${x}`
@@ -251,7 +251,7 @@ function placeInTable(y, x) {
   animateDrop(y,x,gamePiece)
 }
 
-function animateDrop(y,x,piece ){
+function animateDrop(y,x,piece ){ //Funcion that animates the drop of a piece on the board
   if (y === 0){
     document.querySelector(`#cell${0}-${x}`).appendChild(piece)  
   }
@@ -279,7 +279,7 @@ function endGame(msg) {
   // TODO: pop up alert message
 }
 
-function toggleBtnDisabled () {
+function toggleBtnDisabled () { // Toggle Switch-order button disabled property
   !switchBtn.disabled? switchBtn.disabled =  true : switchBtn.disabled = false
   !rowsSlider.disabled? rowsSlider.disabled = true : rowsSlider.disabled = false
   !columnsSlider.disabled? columnsSlider.disabled = true : columnsSlider.disabled = false
@@ -380,7 +380,7 @@ gameStatus.innerText = `${nameMap.get(currPlayer)} playing...`
  */
 makeBoard();
 makeHtmlBoard();
-setTimeout(()=>{
+setTimeout(()=>{ //waits for the DOM to be loaded before alert pops up
   player1Name = prompt("Who is player1?", "Please enter a nickname");
   player2Name = prompt("Who is player2?", "Please enter a nickname");
   if (player1Name && player1Name !== "Please enter a nickname") nameMap.set(1, player1Name)
